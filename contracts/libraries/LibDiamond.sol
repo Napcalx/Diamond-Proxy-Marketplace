@@ -62,20 +62,20 @@ library LibDiamond {
 
         mapping(address => mapping(address => bool)) isApprovedForAll;
 
-        // mapping(uint256 => Order) orders;
+        mapping(uint256 => Order) orders;
 
-        // uint256 orderId;
+        uint256 orderId;
     }
 
-    //  struct Order {
-    //     address token;
-    //     uint256 tokenId;
-    //     uint256 price;
+     struct Order {
+        address token;
+        uint256 tokenId;
+        uint256 price;
 
-    //     uint88 deadline;
-    //     address seller;
-    //     bool active;
-    // }
+        uint88 deadline;
+        address seller;
+        bool active;
+    }
 
     function diamondStorage()
         internal
@@ -106,16 +106,16 @@ library LibDiamond {
         ds.symbol = _symbol;
     } 
 
-    // function getOrder(
-    //     address _token,
-    //     uint256 _tokenId,
-    //     uint256 _price,
-    //     uint88 _deadline,
-    //     address _seller,
-    //     bool _active
-    // ) internal pure returns (Order memory) {
-    //     return Order(_token, _tokenId, _price, _deadline, _seller, _active);
-    // }
+    function getOrder(
+        address _token,
+        uint256 _tokenId,
+        uint256 _price,
+        uint88 _deadline,
+        address _seller,
+        bool _active
+    ) internal pure returns (Order memory) {
+        return Order(_token, _tokenId, _price, _deadline, _seller, _active);
+    }
 
     function contractOwner() internal view returns (address contractOwner_) {
         contractOwner_ = diamondStorage().contractOwner;
