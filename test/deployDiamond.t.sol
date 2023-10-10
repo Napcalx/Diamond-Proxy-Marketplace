@@ -80,16 +80,15 @@ contract DiamondDeployer is DiamondUtils, IDiamondCut {
         ERC721Facet(address(diamond)).safeMint(address(0x2222), uint256(1));
     }
 
+    function testOwnerOf() public {
+        testSafeMint();
+        assertEq(ERC721Facet(address(diamond)).ownerOf(uint256(1)), address(0x2222));
+    }
+
     function testBalanceOf() public {
         testSafeMint();
         assertEq(ERC721Facet(address(diamond)).balanceOf(address(0x2222)), uint256(1));
     }
-
-    function testTransferFrom() public {
-
-    }
-   
-
 
     function diamondCut(
         FacetCut[] calldata _diamondCut,
